@@ -18,15 +18,13 @@ pipeline {
             }
         }
         stage('Test') {
+            when {
+                expression { params.TEST }
+            }
             steps {
-                when {
-                    params.TEST true
-                }
-                steps {
-                    sh '''
-                    docker run -d -p 1000:1000 --name jenkins-dotnet-test dotnet-test-image
-                    '''
-                }
+                sh '''
+                docker run -d -p 1000:1000 --name jenkins-dotnet-test dotnet-test-image
+                '''
             }
         }
     }
