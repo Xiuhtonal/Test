@@ -26,20 +26,19 @@ pipeline {
         }
         stage('Report') {
             steps {
+                sh '''
+                    if [ "$SAVE_ARTIFACT" = "true" ]; then
+                        archiveArtifacts artifacts: 'build/output.txt', fingerprint: true
+                        
+                    fi
+                '''
+
                 copyArtifacts(
                     projectName: 'Test Pipeline',
                     selector: lastSuccessful(),
                     filter: 'build/output.txt',
                     target: 'copied-artifacts/'
                 )
-
-                sh '''
-                    if [ "$SAVE_ARTIFACT" = "true" ]; then
-                        archiveArtifacts artifacts: 'build/output.txt', fingerprint: true
-                        
-                        cat copied-artifacts/build/output.txt
-                    fi
-                '''
             }
         }
     }
