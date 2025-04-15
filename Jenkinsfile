@@ -21,7 +21,7 @@ pipeline {
 
                     dotnet build
                     if [ "$TEST" = "true" ]; then
-                        dotnet test
+                        dotnet run
                     fi
                 '''
             }
