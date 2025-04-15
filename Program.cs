@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace DockerTest
+﻿namespace DockerTest
 {
     internal class UserAccount
     {
@@ -31,22 +29,13 @@ namespace DockerTest
 
         public static void Main(string[] arg)
         {
-            using var loggerFactory = LoggerFactory.Create(builder =>
-            {
-                builder.AddConsole().SetMinimumLevel(LogLevel.Information);
-            });
-
-            ILogger logger = loggerFactory.CreateLogger<Program>();
-
-            logger.LogInformation("Organizing users.");
             List<UserAccount> availableUsersOfAge = users.Where((UserAccount user) => user.Age > 18 && !user.Suspended && user.Balance > 0).ToList();
 
             foreach (var user in availableUsersOfAge)
             {
-                logger.LogInformation("Printing organized users.");
                 Console.WriteLine($"{user.Name} {user.Age} {user.Balance} {user.Suspended}");
 
-                var authorAttribute = (AuthorAttribute)Attribute.GetCustomAttribute(typeof(Program), typeof(AuthorAttribute));
+                var authorAttribute = (AuthorAttribute?)Attribute.GetCustomAttribute(typeof(Program), typeof(AuthorAttribute));
                 if (authorAttribute != null)
                 {
                     Console.WriteLine(authorAttribute.Name);
