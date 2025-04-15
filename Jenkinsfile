@@ -27,7 +27,7 @@ pipeline {
         stage('Report') {
             steps {
                 copyArtifacts(
-                    projectName: 'source-job-name',
+                    projectName: 'Test Pipeline',
                     selector: lastSuccessful(),
                     filter: 'build/output.txt',
                     target: 'copied-artifacts/'
