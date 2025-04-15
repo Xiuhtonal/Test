@@ -13,7 +13,10 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                docker build -t dotnet-test-image .
+                    curl -sSL https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
+                    chmod +x dotnet-install.sh
+                    ./dotnet-install.sh --channel 8.0 --install-dir $HOME/dotnet
+                    export PATH=$HOME/dotnet:$PATH
                 '''
             }
         }
@@ -23,7 +26,8 @@ pipeline {
             }
             steps {
                 sh '''
-                docker run -d -p 1000:1000 --name jenkins-dotnet-test dotnet-test-image
+                dotnet build
+                dotnet test
                 '''
             }
         }
