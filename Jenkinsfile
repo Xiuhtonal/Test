@@ -32,13 +32,6 @@ pipeline {
                         
                     fi
                 '''
-
-                copyArtifacts(
-                    projectName: 'Test Pipeline',
-                    selector: lastSuccessful(),
-                    filter: 'build/output.txt',
-                    target: 'copied-artifacts/'
-                )
             }
         }
     }
