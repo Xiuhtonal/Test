@@ -7,7 +7,7 @@ pipeline {
     }
 
     parameters {
-        booleanParam(name: 'TEST', defaultValue: true, description: 'Test New Code?')
+        booleanParam(name: 'SAVE_ARTIFACT', defaultValue: true, description: 'Save artifact?')
     }
 
     stages {
@@ -20,11 +20,27 @@ pipeline {
                     export PATH=$HOME/dotnet:$PATH
 
                     dotnet build
-                    if [ "$TEST" = "true" ]; then
-                        dotnet run
+                    dotnet run
+                '''
+            }
+        stage('Report') {
+            steps {
+                copyArtifacts(
+                    projectName: 'source-job-name',
+                    selector: lastSuccessful(),
+                    filter: 'build/output.txt',
+                    target: 'copied-artifacts/'
+                )
+
+                sh '''
+                    if [ "$SAVE_ARTIFACT" = "true" ]; then
+                        archiveArtifacts artifacts: 'build/output.txt', fingerprint: true
+                        
+                        cat copied-artifacts/build/output.txt
                     fi
                 '''
             }
+        }
         }
     }
 }
