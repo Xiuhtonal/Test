@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         NODE_ENV = 'production'
-        API_KEY = credentials('api-key-id')
     }
 
     parameters {
