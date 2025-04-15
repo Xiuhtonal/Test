@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'mcr.microsoft.com/dotnet/sdk:8.0'
+        }
+    }
 
     environment {
         NODE_ENV = 'production'
@@ -13,10 +17,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                    curl -sSL https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh
-                    chmod +x dotnet-install.sh
-                    ./dotnet-install.sh --channel 8.0 --install-dir $HOME/dotnet
-                    export PATH=$HOME/dotnet:$PATH
+                dotnet build
                 '''
             }
         }
@@ -26,7 +27,6 @@ pipeline {
             }
             steps {
                 sh '''
-                dotnet build
                 dotnet test
                 '''
             }
