@@ -23,6 +23,7 @@ pipeline {
                     dotnet run
                 '''
             }
+        }
         stage('Report') {
             steps {
                 copyArtifacts(
