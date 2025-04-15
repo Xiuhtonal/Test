@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FhtH9i7i6Xs=",
+  "dgSpecHash": "/xhwiD4S354=",
   "success": true,
-  "projectFilePath": "C:\\Users\\x.martinez\\Documents\\Examples\\Qualifications\\dockerTest\\dockerTest\\dockerTest.csproj",
+  "projectFilePath": "C:\\Git\\dockerTest\\dockerTest\\dockerTest.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\x.martinez\\.nuget\\packages\\microsoft.extensions.configuration\\9.0.4\\microsoft.extensions.configuration.9.0.4.nupkg.sha512",
     "C:\\Users\\x.martinez\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.4\\microsoft.extensions.configuration.abstractions.9.0.4.nupkg.sha512",
